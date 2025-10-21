@@ -1,54 +1,4 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
-    display: flex;
-    justify-content: center;
-    align: items: center;
-    min-height: 100vh;
-    /* Memberi ruang 3D untuk kartu */
-    perspective: 1500px;
-}
-
-/* Canvas untuk konfeti, ditaruh di belakang tapi di atas background */
-/* Kamu bisa hapus ini jika tidak pakai konfeti */
-#confetti-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    pointer-events: none;
-}
-
-/* Kontainer kartu utama */
-.card {
-    width: 350px;
-    height: 500px;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 1s;
-    z-index: 10;
-    
-    /* Saat kartu terbuka, kita geser sedikit ke kanan */
-    /* agar putarannya terlihat pas di tengah */
-    transition: transform 1s;
-}
-
-/* Ini adalah class 'open' yang ditambahkan oleh JS */
-.card.open {
-    transform: translateX(87.5px); /* Geser setengah lebar kartu (350px / 2 = 175px. Kita ambil setengahnya lagi) */
-}
-
-.card-cover, .card-inside {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    text-align: center;
-}
+/* ... kode sebelumnya ... */
 
 /* Bagian SAMPUL */
 .card-cover {
@@ -62,87 +12,31 @@ body {
     box-sizing: border-box;
     cursor: pointer;
     
-    /* Ini kuncinya: kartu berputar dari sisi kiri */
     transform-origin: left;
     transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    /* PENTING: JANGAN pakai backface-visibility: hidden */
-    /* Kita ingin melihat bagian belakang sampulnya */
     
     z-index: 10;
 }
 
-/* === INI BAGIAN YANG BERUBAH === */
+/* Saat kartu terbuka, putar sampulnya */
 .card.open .card-cover {
-    /* Putar sampulnya 180 derajat */
     transform: rotateY(-180deg);
 }
+
+/* === BAGIAN BARU UNTUK MENGHILANGKAN ISI SAMPUL SAAT TERBUKA === */
+.card.open .card-cover h2,
+.card.open .card-cover .gift-icon,
+.card.open .card-cover p {
+    opacity: 0; /* Membuat elemen transparan */
+    transition: opacity 0.3s ease; /* Transisi agar hilangnya halus */
+    transition-delay: 0.2s; /* Sedikit delay agar terlihat lebih baik */
+    pointer-events: none; /* Mencegah interaksi dengan elemen yang tersembunyi */
+}
+/* ============================================================= */
 
 .gift-icon {
     width: 80px;
     margin: 20px 0;
 }
 
-.card-cover h2 {
-    font-size: 2.2em;
-    margin: 0;
-}
-.card-cover p {
-    font-size: 1.2em;
-    margin-top: 10px;
-    font-weight: 300;
-}
-
-
-/* Bagian ISI KARTU */
-.card-inside {
-    background: #ffffff;
-    color: #333;
-    padding: 30px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Isi kartu ada di lapisan di bawah sampul */
-    z-index: 5;
-}
-
-.birthday-cake {
-    width: 100px;
-    margin-bottom: 20px;
-}
-
-.card-inside h1 {
-    color: #e85a4f;
-    font-size: 2em;
-    margin: 0 0 15px 0;
-}
-
-.card-inside p {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin: 5px 0;
-}
-
-.signature {
-    margin-top: 25px;
-    font-style: italic;
-    color: #555;
-}
-
-button {
-    background-color: #555;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #e85a4f;
-}
+/* ... kode selanjutnya ... */
