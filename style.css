@@ -104,11 +104,8 @@ body {
     align-items: center;
     /* Isi kartu ada di lapisan di bawah sampul */
     z-index: 5;
-}
 
-.birthday-cake {
-    width: 100px;
-    margin-bottom: 20px;
+
 }
 
 .card-inside h1 {
@@ -155,3 +152,4 @@ button:hover {
     transition-delay: 0.2s; /* Sedikit delay agar terlihat lebih baik */
     pointer-events: none; /* Mencegah interaksi dengan elemen yang tersembunyi */
 }
+
