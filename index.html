@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selamat Ulang Tahun!</title>
+    <title>Untukmu, Zaidaan!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="card">
-        <h1>Selamat Ulang Tahun, [Nama Teman Kamu]!</h1>
-        
-        <img src="https://i.ibb.co/wKqf8qf/birthday-cake.png" alt="Kue Ulang Tahun" class="birthday-cake">
-        
-        <p>Semoga hari ini jadi hari yang spesial buat kamu. Sehat selalu, makin sukses, dan semua keinginanmu tercapai di tahun ini!</p>
-        
-        <p>Best wishes,</p>
-        <p><strong>[Nama Kamu]</strong></p>
+    <div class="card-container">
+        <div class="card-front" id="cardFront">
+            <img src="https://i.ibb.co/wKqf8qf/birthday-cake.png" alt="Kue Ulang Tahun" class="birthday-cake-small">
+            <h2>Selamat Ulang Tahun!</h2>
+            <p>Buka</p>
+        </div>
 
-        <button id="surpriseButton">🎁 Klik untuk Kejutan!</button>
+        <div class="card-back" id="cardBack">
+            <h1>Selamat Ulang Tahun, Zaidaan!</h1>
+            
+            <p>Semoga hari ini jadi hari yang spesial buat kamu. Sehat selalu, makin sukses, dan semua keinginanmu tercapai di tahun ini!</p>
+            
+            <p>Best wishes,</p>
+            <p><strong>Zaidaan</strong></p>
 
-        <div id="surpriseMessage" class="hidden">
-            <p><strong>Pesan Tambahan:</strong></p>
-            <p>[Tulis pesan kejutan atau doa spesial di sini. Contoh: Jangan lupa traktirannya ya! 😉]</p>
+            <div id="surpriseMessage">
+                <p><strong>Pesan Tambahan:</strong></p>
+                <p>Makasih Traktirannya bub</p>
+            </div>
+            <button id="closeButton">Tutup Kartu</button>
         </div>
     </div>
 
