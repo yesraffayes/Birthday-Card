@@ -3,7 +3,7 @@ body {
     background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
     display: flex;
     justify-content: center;
-    align: items: center;
+    align-items: center;
     min-height: 100vh;
     /* Memberi ruang 3D untuk kartu */
     perspective: 1500px;
@@ -72,9 +72,8 @@ body {
     z-index: 10;
 }
 
-/* === INI BAGIAN YANG BERUBAH === */
+/* Saat kartu terbuka, putar sampulnya */
 .card.open .card-cover {
-    /* Putar sampulnya 180 derajat */
     transform: rotateY(-180deg);
 }
 
@@ -145,4 +144,14 @@ button {
 
 button:hover {
     background-color: #e85a4f;
+}
+
+/* === BAGIAN UNTUK MENGHILANGKAN ISI SAMPUL SAAT TERBUKA === */
+.card.open .card-cover h2,
+.card.open .card-cover .gift-icon,
+.card.open .card-cover p {
+    opacity: 0; /* Membuat elemen transparan */
+    transition: opacity 0.3s ease; /* Transisi agar hilangnya halus */
+    transition-delay: 0.2s; /* Sedikit delay agar terlihat lebih baik */
+    pointer-events: none; /* Mencegah interaksi dengan elemen yang tersembunyi */
 }
