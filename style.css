@@ -1,100 +1,128 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f0f4f8;
+    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow: hidden; /* Mencegah scroll saat animasi */
-    perspective: 1000px; /* Penting untuk efek 3D flip */
+    /* Memberi ruang 3D untuk kartu */
+    perspective: 1500px;
 }
 
-.card-container {
-    width: 300px; /* Lebar kartu saat tertutup */
-    height: 400px; /* Tinggi kartu saat tertutup */
+/* Canvas untuk konfeti, ditaruh di belakang tapi di atas background */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Penting: Biar canvas-nya tidak bisa diklik */
+    pointer-events: none;
+}
+
+/* Kontainer kartu utama */
+.card {
+    width: 350px;
+    height: 500px;
     position: relative;
-    transform-style: preserve-3d;
-    transition: transform 1s; /* Animasi flip keseluruhan */
-    cursor: pointer;
+    transform-style: preserve-3d; /* Mengaktifkan mode 3D */
+    transition: transform 1s;
+    z-index: 10;
 }
 
-/* Animasi saat kartu terbuka */
-.card-container.open {
-    transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
+.card-cover, .card-inside {
     width: 100%;
     height: 100%;
     position: absolute;
-    backface-visibility: hidden; /* Menyembunyikan sisi belakang saat tidak menghadap kita */
     border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Bagian SAMPUL */
+.card-cover {
+    background: #e85a4f;
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    text-align: center;
+    cursor: pointer;
+    
+    /* Ini kuncinya: kartu berputar dari sisi kiri */
+    transform-origin: left;
+    transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Mencegah bagian belakang sampul terlihat saat memutar */
+    backface-visibility: hidden;
+    
+    /* Sampul ada di lapisan paling atas */
+    z-index: 10;
 }
 
-.card-front {
-    background-color: #e85a4f; /* Warna merah cerah */
-    color: white;
-    font-size: 1.5em;
-    font-weight: bold;
-    z-index: 2;
+.card.open .card-cover {
+    /* Saat .card punya class .open, putar sampulnya 180 derajat */
+    transform: rotateY(-180deg);
 }
 
-.card-front h2 {
-    margin-bottom: 10px;
-    font-size: 1.8em;
-}
-
-.card-front p {
-    font-size: 1em;
-    margin-top: 10px;
-}
-
-.birthday-cake-small {
+.gift-icon {
     width: 80px;
-    margin-bottom: 15px;
+    margin: 20px 0;
 }
 
-.card-back {
-    background-color: #ffffff;
+.card-cover h2 {
+    font-size: 2.2em;
+    margin: 0;
+}
+.card-cover p {
+    font-size: 1.2em;
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+
+/* Bagian ISI KARTU */
+.card-inside {
+    background: #ffffff;
     color: #333;
-    transform: rotateY(180deg); /* Memutar sisi belakang agar tersembunyi */
-    z-index: 1;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Isi kartu ada di lapisan di bawah sampul */
+    z-index: 5;
 }
 
-.card-back h1 {
+.birthday-cake {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.card-inside h1 {
     color: #e85a4f;
     font-size: 2em;
-    margin-bottom: 15px;
+    margin: 0 0 15px 0;
 }
 
-.card-back p {
+.card-inside p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: 5px 0;
+}
+
+.signature {
+    margin-top: 25px;
+    font-style: italic;
     color: #555;
-    font-size: 1em;
-    line-height: 1.5;
-    margin-bottom: 10px;
-}
-
-#surpriseMessage {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #fdfaf6;
-    border-left: 4px solid #e85a4f;
-    border-radius: 5px;
-    font-size: 0.9em;
 }
 
 button {
-    background-color: #e85a4f;
+    background-color: #555;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -103,10 +131,9 @@ button {
     font-weight: bold;
     cursor: pointer;
     margin-top: 20px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #d14a3f;
-    transform: scale(1.05);
+    background-color: #e85a4f;
 }
