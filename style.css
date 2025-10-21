@@ -10,7 +10,6 @@ body {
 }
 
 /* Canvas untuk konfeti, ditaruh di belakang tapi di atas background */
-/* Kamu bisa hapus ini jika tidak pakai konfeti */
 #confetti-canvas {
     position: fixed;
     top: 0;
@@ -66,20 +65,12 @@ body {
     transform-origin: left;
     transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     
-    /* PENTING: JANGAN pakai backface-visibility: hidden */
-    /* Kita ingin melihat bagian belakang sampulnya */
-    
     z-index: 10;
 }
 
 /* Saat kartu terbuka, putar sampulnya */
 .card.open .card-cover {
     transform: rotateY(-180deg);
-}
-
-.gift-icon {
-    width: 80px;
-    margin: 20px 0;
 }
 
 .card-cover h2 {
@@ -104,8 +95,6 @@ body {
     align-items: center;
     /* Isi kartu ada di lapisan di bawah sampul */
     z-index: 5;
-
-
 }
 
 .card-inside h1 {
@@ -145,11 +134,9 @@ button:hover {
 
 /* === BAGIAN UNTUK MENGHILANGKAN ISI SAMPUL SAAT TERBUKA === */
 .card.open .card-cover h2,
-.card.open .card-cover .gift-icon,
 .card.open .card-cover p {
     opacity: 0; /* Membuat elemen transparan */
     transition: opacity 0.3s ease; /* Transisi agar hilangnya halus */
     transition-delay: 0.2s; /* Sedikit delay agar terlihat lebih baik */
     pointer-events: none; /* Mencegah interaksi dengan elemen yang tersembunyi */
 }
-
