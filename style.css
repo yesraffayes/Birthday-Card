@@ -3,13 +3,14 @@ body {
     background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align: items: center;
     min-height: 100vh;
     /* Memberi ruang 3D untuk kartu */
     perspective: 1500px;
 }
 
 /* Canvas untuk konfeti, ditaruh di belakang tapi di atas background */
+/* Kamu bisa hapus ini jika tidak pakai konfeti */
 #confetti-canvas {
     position: fixed;
     top: 0;
@@ -17,7 +18,6 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
-    /* Penting: Biar canvas-nya tidak bisa diklik */
     pointer-events: none;
 }
 
@@ -26,9 +26,18 @@ body {
     width: 350px;
     height: 500px;
     position: relative;
-    transform-style: preserve-3d; /* Mengaktifkan mode 3D */
+    transform-style: preserve-3d;
     transition: transform 1s;
     z-index: 10;
+    
+    /* Saat kartu terbuka, kita geser sedikit ke kanan */
+    /* agar putarannya terlihat pas di tengah */
+    transition: transform 1s;
+}
+
+/* Ini adalah class 'open' yang ditambahkan oleh JS */
+.card.open {
+    transform: translateX(87.5px); /* Geser setengah lebar kartu (350px / 2 = 175px. Kita ambil setengahnya lagi) */
 }
 
 .card-cover, .card-inside {
@@ -57,15 +66,15 @@ body {
     transform-origin: left;
     transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
     
-    /* Mencegah bagian belakang sampul terlihat saat memutar */
-    backface-visibility: hidden;
+    /* PENTING: JANGAN pakai backface-visibility: hidden */
+    /* Kita ingin melihat bagian belakang sampulnya */
     
-    /* Sampul ada di lapisan paling atas */
     z-index: 10;
 }
 
+/* === INI BAGIAN YANG BERUBAH === */
 .card.open .card-cover {
-    /* Saat .card punya class .open, putar sampulnya 180 derajat */
+    /* Putar sampulnya 180 derajat */
     transform: rotateY(-180deg);
 }
 
