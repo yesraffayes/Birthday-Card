@@ -26,3 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+.card.open .card-cover h2,
+.card.open .card-cover .gift-icon,
+.card.open .card-cover p {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transition-delay: 0.2s;
+    pointer-events: none;
+}
